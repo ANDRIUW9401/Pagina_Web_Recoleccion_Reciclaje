@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>EcoRecicla - Gestión de Reciclaje</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ====== LOGIN ====== -->
+    <section id="login-view" class="view active">
+      <div class="card card-auth">
+        <div class="card-illustration">
+          <div class="illu-text">
+            <h2>EcoRecicla</h2>
+            <p>Conecta ciudad, naturaleza y reciclaje responsable.</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <h1 class="card-title">Iniciar sesión</h1>
+          <p class="card-subtitle">
+            Ingresa para gestionar y consultar las recolecciones de material reciclable.
+          </p>
+
+          <form id="login-form" class="form">
+            <div class="form-group">
+              <label for="login-email">Correo electrónico</label>
+              <input type="email" id="login-email" required placeholder="tucorreo@ejemplo.com" />
+            </div>
+            <div class="form-group">
+              <label for="login-password">Contraseña</label>
+              <input type="password" id="login-password" required placeholder="********" />
+            </div>
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+          </form>
+
+          <p class="helper-text">
+            ¿No tienes cuenta?
+            <a href="#" id="go-to-register">Regístrate aquí</a>
+          </p>
+          <p class="helper-text small">
+            Usuario demo: <strong>demo@eco.com</strong> / Contraseña: <strong>123456</strong>
+          </p>
+          <div id="login-message" class="message"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== REGISTRO DE USUARIO ====== -->
+    <section id="register-view" class="view">
+      <div class="card card-auth">
+        <div class="card-illustration alt">
+          <div class="illu-text">
+            <h2>Únete a la red</h2>
+            <p>Registra tus recolecciones y aporta a un planeta más limpio.</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <h1 class="card-title">Registro de usuario</h1>
+          <p class="card-subtitle">
+            Crea tu cuenta como ciudadano, recolector o administrador ambiental.
+          </p>
+
+          <form id="register-form" class="form">
+            <div class="form-group">
+              <label for="reg-name">Nombre completo</label>
+              <input type="text" id="reg-name" required placeholder="Nombre y apellidos" />
+            </div>
+            <div class="form-group">
+              <label for="reg-email">Correo electrónico</label>
+              <input type="email" id="reg-email" required placeholder="tucorreo@ejemplo.com" />
+            </div>
+            <div class="form-group">
+              <label for="reg-role">Rol</label>
+              <select id="reg-role" required>
+                <option value="">Selecciona un rol</option>
+                <option value="ciudadano">Ciudadano</option>
+                <option value="recolector">Recolector</option>
+                <option value="administrador">Administrador</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reg-password">Contraseña</label>
+              <input type="password" id="reg-password" required placeholder="Mínimo 6 caracteres" />
+            </div>
+            <div class="form-group">
+              <label for="reg-password2">Confirmar contraseña</label>
+              <input type="password" id="reg-password2" required placeholder="Repite la contraseña" />
+            </div>
+            <button type="submit" class="btn btn-primary">Crear cuenta</button>
+            <button type="button" class="btn btn-ghost" id="back-to-login">
+              Volver al inicio de sesión
+            </button>
+          </form>
+
+          <div id="register-message" class="message"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== DASHBOARD ====== -->
+    <section id="dashboard-view" class="view">
+      <header class="topbar">
+        <div class="topbar-left">
+          <span class="logo-circle">♻</span>
+          <div>
+            <h1>EcoRecicla</h1>
+            <p class="topbar-subtitle">Gestión de recolecciones reciclables</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span id="current-user-name" class="user-chip"></span>
+          <button id="logout-btn" class="btn btn-ghost small">Cerrar sesión</button>
+        </div>
+      </header>
+
+      <main class="dashboard-layout">
+        <aside class="sidebar">
+          <nav>
+            <h2>Menú</h2>
+            <ul>
+              <li class="active" id="menu-casos">Consulta de casos</li>
+              <li id="menu-registrar">Registrar caso</li>
+            </ul>
+          </nav>
+
+          <div class="sidebar-illustration">
+            <p>
+              Visualiza el historial de recolecciones, materiales y ubicaciones
+              para tomar mejores decisiones ambientales.
+            </p>
+          </div>
+        </aside>
+
+        <section class="content">
+          <!-- === PANE CONSULTA === -->
+          <div id="content-consulta" class="content-pane">
+            <div class="content-header">
+              <h2>Casos de recolección registrados</h2>
+              <p>
+                Consulta los casos registrados y utiliza los filtros para encontrar
+                materiales o ubicaciones específicas.
+              </p>
+            </div>
+
+            <div class="filters">
+              <div class="form-group inline">
+                <label for="filter-text">Buscar por material o ubicación</label>
+                <input
+                  type="text"
+                  id="filter-text"
+                  placeholder="Ej: Plástico, Vidrio, Parque Central..."
+                />
+              </div>
+              <div class="form-group inline">
+                <label for="filter-status">Estado</label>
+                <select id="filter-status">
+                  <option value="">Todos</option>
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="En proceso">En proceso</option>
+                  <option value="Completado">Completado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Material</th>
+                    <th>Peso (kg)</th>
+                    <th>Ubicación</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="cases-table-body">
+                  <!-- Filas generadas por JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <p class="hint">
+              * Datos de ejemplo cargados en el navegador. En una versión real
+              estos casos vendrían de la base de datos / API.
+            </p>
+          </div>
+
+          <!-- === PANE REGISTRO DE CASOS === -->
+          <div id="content-registro" class="content-pane hidden">
+            <div class="content-header">
+              <h2>Registrar nuevo caso de recolección</h2>
+              <p>
+                Diligencia el formulario con la información del material reciclable
+                y la ubicación donde se realizará la recolección.
+              </p>
+            </div>
+
+            <form id="case-form" class="form form-two-cols">
+              <div class="form-group">
+                <label for="case-date">Fecha de recolección</label>
+                <input type="date" id="case-date" required />
+              </div>
+
+              <div class="form-group">
+                <label for="case-material">Material</label>
+                <select id="case-material" required>
+                  <option value="">Selecciona un material</option>
+                  <option value="Plástico">Plástico</option>
+                  <option value="Vidrio">Vidrio</option>
+                  <option value="Cartón">Cartón</option>
+                  <option value="Metales">Metales</option>
+                  <option value="Orgánico">Orgánico</option>
+                  <option value="Otros">Otros</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="case-weight">Peso estimado (kg)</label>
+                <input
+                  type="number"
+                  id="case-weight"
+                  min="0"
+                  step="0.1"
+                  required
+                  placeholder="Ej: 12.5"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="case-location">Ubicación</label>
+                <input
+                  type="text"
+                  id="case-location"
+                  required
+                  placeholder="Barrio, parque, institución..."
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="case-status">Estado</label>
+                <select id="case-status" required>
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="En proceso">En proceso</option>
+                  <option value="Completado">Completado</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="case-notes">Observaciones (opcional)</label>
+                <input
+                  type="text"
+                  id="case-notes"
+                  placeholder="Notas adicionales sobre el caso"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                Guardar caso
+              </button>
+              <button type="button" class="btn btn-ghost" id="go-to-list">
+                Ver listado de casos
+              </button>
+            </form>
+
+            <div id="case-message" class="message"></div>
+          </div>
+        </section>
+      </main>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
